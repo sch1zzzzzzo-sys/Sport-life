@@ -46,17 +46,6 @@ public class AuthClass{
                 .getBody()
                 .getSubject();
     }
-    public Boolean validetTokenAccess(String tokenAccess){
-        try {
-            Jwts.parserBuilder()
-                    .setSigningKey(Keys.hmacShaKeyFor(SECRET_ACCESS.getBytes()))
-                    .build()
-                    .parseClaimsJwt(tokenAccess);
-        }catch (Exception e){
-            return false;
-        }
-        return false;
-    }
     public Boolean validetTokenRefresh(String tokenRefresh){
         try {
             Jwts.parserBuilder()
