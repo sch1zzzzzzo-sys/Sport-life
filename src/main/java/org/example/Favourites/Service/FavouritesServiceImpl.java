@@ -13,6 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class FavouritesServiceImpl implements FavouritesService {
@@ -40,5 +44,12 @@ public class FavouritesServiceImpl implements FavouritesService {
             throw new FavouritesNotFoundException("","result");
         }
         return favourites.map(Favourites::getExercise);
+    }
+
+    @Override
+    public Map<Exercise, Boolean> getFavouritesByExercise(List<Exercise> exercises, Employee employee) {
+        List<Favourites> favourites=favouritesRepository.findFavouritesByEmployeeAndExerciseIn(exercises,employee);
+        Map<Exercise,Boolean> favouritesMap=favourites.stream().collect(Collectors.toMap(f->f.getExercise(),f->true));
+        return null;
     }
 }

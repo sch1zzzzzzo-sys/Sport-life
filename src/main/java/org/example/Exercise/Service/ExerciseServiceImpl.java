@@ -22,7 +22,6 @@ public class ExerciseServiceImpl implements ExerciseService {
     public Exercise findExercisesByName(String name) {
         return exerciseRepository.findByName(name).orElseThrow(()->new ExerciseNotFoundException("",""));
     }
-
     @Override
     public Page<Exercise> filterExerciseByExperts(String experts, Set<Exercise> agonists, Set<Exercise> items, int page, int size) {
         Pageable pageable= PageRequest.of(page,size);

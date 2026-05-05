@@ -17,7 +17,7 @@ public class EmployeeMapper {
     public FindTopEmployeesResponse toDtoTopEmployees(List<Employee> employees, Map<Employee,String> names){
         FindTopEmployeesResponse findTopEmployeesResponse =new FindTopEmployeesResponse();
         List<FindTopEmployeesResponse.EmployeeTop> top=employees.stream().map(e->{
-            return new FindTopEmployeesResponse.EmployeeTop(e.getLogin(),e.getActivity(),names.get(e));
+            return new FindTopEmployeesResponse.EmployeeTop(e.getLogin(),e.getActivity(),e.getExperts(),names.get(e));
         }).toList();
         findTopEmployeesResponse.setTop(top);
         return findTopEmployeesResponse;

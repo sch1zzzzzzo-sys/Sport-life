@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class ExerciseController {
     private  final FindExercises findExercises;
 
-    @PostMapping("/info")
+    @PostMapping("/search")
     public ResponseEntity<?> findExercises(@Valid @RequestBody FindExercisesRequest dto,
                                            @AuthenticationPrincipal EmployeePrincipal principal,
                                            @RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "10") int size){

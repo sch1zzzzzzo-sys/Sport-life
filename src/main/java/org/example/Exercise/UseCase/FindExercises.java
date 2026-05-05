@@ -31,7 +31,7 @@ public class FindExercises {
     private final ExerciseMapper exerciseMapper;
     private final ExerciseService exerciseService;
 
-    public FindExercisesResponse findExercises(FindExercisesRequest dto, EmployeePrincipal principal,int size,int page){
+    public FindExercisesResponse findExercises(FindExercisesRequest dto, EmployeePrincipal principal, int size, int page){
         Set<Exercise> agonists = agonistsService.getExercises(muscleService.findMusclesByNames(dto.getMuscles()));
         Set<Exercise> items=itemsService.findExercisesByInventory(inventoryService.findInventoriesByNames(dto.getItems()));
         Employee employee=employeeService.findEmployeeByLogin(principal.getLogin());

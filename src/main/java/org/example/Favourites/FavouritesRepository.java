@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,5 +18,8 @@ public interface FavouritesRepository extends JpaRepository<Favourites,Long> {
     @EntityGraph(attributePaths = {"exercise"})
     Page<Favourites> findByEmployee( Employee employee,Pageable pageable);
     Optional<Favourites> findByEmployeeAndExercise(Employee employee, Exercise exercise);
-    boolean existsByEmployeeAndExercise(Employee employee,Exercise exercise);
+
+    boolean existsByEmployeeAndExercise(Employee employee, Exercise exercise);
+    @Query("select f from Favourites f where f.employee=: employee and f.exercise in: exercises ")
+    List<Favourites> findFavouritesByEmployeeAndExerciseIn(@Param("exercises") List<Exercise> exercises,@Param("employee") Employee employee);
 }

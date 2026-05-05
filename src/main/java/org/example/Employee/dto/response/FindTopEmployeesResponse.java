@@ -18,6 +18,7 @@ public class FindTopEmployeesResponse {
     public static class EmployeeTop{
         private String login;
         private Long activity;
+        private String experts;
         private String avatar;
     }
 }

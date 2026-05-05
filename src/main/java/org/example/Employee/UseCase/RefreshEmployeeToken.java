@@ -14,8 +14,13 @@ public class RefreshEmployeeToken {
     private final AuthClass authClass;
     public RefreshEmployeeTokenResponse refresh(RefreshEmployeeTokenRequest dto){
         String tokenRefresh=dto.getTokenRefresh();
-        String login=authClass.getLoginRefresh(tokenRefresh);
-        String tokenAccess=authClass.createToken(login);
-        return new RefreshEmployeeTokenResponse(tokenAccess);
+        RefreshEmployeeTokenResponse response=new RefreshEmployeeTokenResponse();
+        String tokenAccess;
+        if(authClass.validetTokenRefresh(tokenRefresh)){
+            String login=authClass.getLoginRefresh(tokenRefresh);
+            tokenAccess=authClass.createToken(login);
+            response=new RefreshEmployeeTokenResponse(tokenAccess,tokenRefresh);
+        }
+        return response;
     }
 }

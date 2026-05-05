@@ -1,8 +1,11 @@
 package org.example.Employee.dto.response;
 
-public class RefreshEmployeeTokenResponse extends EmployeeDetailsResponse{
-    public RefreshEmployeeTokenResponse(String message){
-        super(message);
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+public class RefreshEmployeeTokenResponse extends EmployeeRegistrationDetails{
+    public RefreshEmployeeTokenResponse(String accessToken,String refreshToken){
+        super(accessToken,refreshToken);
 
     }
 }

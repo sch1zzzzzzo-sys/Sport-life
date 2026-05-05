@@ -18,11 +18,12 @@ public class FindExercisesResponse {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ExerciseObject{
-        private String name;
         private String video;
         private String description;
-        private String photo;
+        private String name;
         private List<String> muscles;
         private List<String> items;
+        private Boolean favourites;
+        private String experts;
     }
 }

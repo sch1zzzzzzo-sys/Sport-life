@@ -20,7 +20,6 @@ public class EmployeeController {
     private final UpdateEmployeeActivity updateEmployeeActivity;
     private final UpdateEmployeeExperts updateEmployeeExperts;
     private final RefreshEmployeeToken refreshEmployeeToken;
-    private final ValidetEmployeeToken validetEmployeeToken;
 
     @PostMapping("/auth")
     public ResponseEntity<?> authEmployee(@Valid @RequestBody  AuthEmployeeRequest dto){
@@ -33,10 +32,6 @@ public class EmployeeController {
     @PostMapping("/refresh")
     public ResponseEntity<?> refreshToken(@Valid @RequestBody RefreshEmployeeTokenRequest dto){
         return ResponseEntity.ok(refreshEmployeeToken.refresh(dto));
-    }
-    @PostMapping("/validet")
-    public ResponseEntity<?> validetToken(@Valid @RequestBody ValidetEmployeeTokenRequest dto){
-        return ResponseEntity.ok(validetEmployeeToken.validet(dto));
     }
 
     @GetMapping("/info")
