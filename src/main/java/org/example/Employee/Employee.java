@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Employee")
+@Table(name = "employee")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -26,7 +26,7 @@ public class Employee {
     private String experts;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Avatar_id")
+    @JoinColumn(name = "avatar_id")
     private Avatar avatar;
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -37,11 +37,6 @@ public class Employee {
     public Employee(String login, Avatar avatar, String password,Long activity) {
         this.login=login;
         this.avatar=avatar;
-        this.password=password;
-        this.activity=activity;
-    }
-    public Employee(String login, String password,Long activity) {
-        this.login=login;
         this.password=password;
         this.activity=activity;
     }

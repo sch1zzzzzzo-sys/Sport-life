@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -48,8 +49,16 @@ public class FavouritesServiceImpl implements FavouritesService {
 
     @Override
     public Map<Exercise, Boolean> getFavouritesByExercise(List<Exercise> exercises, Employee employee) {
-        List<Favourites> favourites=favouritesRepository.findFavouritesByEmployeeAndExerciseIn(exercises,employee);
-        Map<Exercise,Boolean> favouritesMap=favourites.stream().collect(Collectors.toMap(f->f.getExercise(),f->true));
-        return null;
+        List<Exercise> favourites= favouritesRepository.findFavouritesByEmployeeAndExerciseIn(exercises,employee).stream().map(f-> f.getExercise()).toList();
+        Map<Exercise,Boolean> favouritesMaps=new LinkedHashMap<>();
+        for(Exercise exercise:exercises){
+            if(favourites.contains(exercise)){
+                favouritesMaps.put(exercise,true);
+            }else{
+                favouritesMaps.put(exercise,false);
+            }
+        }
+        return favouritesMaps;
+
     }
 }

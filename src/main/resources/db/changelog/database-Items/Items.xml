@@ -6,15 +6,15 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="2026-03-02-Items.xml" author="Dmitry">
-        <createTable tableName="Items">
+        <createTable tableName="items">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="Exercise_id" type="BIGINT">
-                <constraints nullable="false" unique="false" references="Exercise(id)" foreignKeyName="fk_Items_Exercise"/>
+            <column name="exercise_id" type="BIGINT">
+                <constraints nullable="false" unique="false" references="exercise(id)" foreignKeyName="fk_items_exercise"/>
             </column>
-            <column name="Inventory_id" type="BIGINT">
-                <constraints nullable="false" unique="false" references="Inventory(id)" foreignKeyName="fk_Items_Inventory"/>
+            <column name="inventory_id" type="BIGINT">
+                <constraints nullable="false" unique="false" references="inventory(id)" foreignKeyName="fk_items_inventory"/>
             </column>
         </createTable>
     </changeSet>

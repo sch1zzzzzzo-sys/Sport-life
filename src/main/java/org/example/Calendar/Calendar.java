@@ -9,7 +9,7 @@ import org.example.Employee.Employee;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Calendar")
+@Table(name = "calendar")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +20,7 @@ public class Calendar {
     private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Employee_id")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     public Calendar(LocalDateTime date, Employee employee) {

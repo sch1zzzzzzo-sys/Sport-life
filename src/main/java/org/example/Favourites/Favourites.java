@@ -9,7 +9,7 @@ import org.example.Exercise.Exercise;
 
 @Entity
 @Data
-@Table(name = "Favourites")
+@Table(name = "favourites")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Favourites {
@@ -17,10 +17,10 @@ public class Favourites {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "Exercise_id")
+    @JoinColumn(name = "exercise_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Exercise exercise;
-    @JoinColumn(name = "Employee_id")
+    @JoinColumn(name = "employee_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee employee;
 

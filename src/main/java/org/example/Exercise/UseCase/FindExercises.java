@@ -9,6 +9,8 @@ import org.example.Exercise.Service.ExerciseService;
 import org.example.Exercise.dto.ExerciseMapper;
 import org.example.Exercise.dto.request.FindExercisesRequest;
 import org.example.Exercise.dto.response.FindExercisesResponse;
+import org.example.Favourites.Favourites;
+import org.example.Favourites.Service.FavouritesService;
 import org.example.Inventory.Service.InventoryService;
 import org.example.Items.Service.ItemsService;
 import org.example.Muscle.Service.MuscleService;
@@ -28,6 +30,7 @@ public class FindExercises {
     private final InventoryService inventoryService;
     private final ItemsService itemsService;
     private final MuscleService muscleService;
+    private final FavouritesService favouritesService;
     private final ExerciseMapper exerciseMapper;
     private final ExerciseService exerciseService;
 
@@ -40,6 +43,7 @@ public class FindExercises {
         List<Exercise> exercisesList=exercises.getContent();
         Map<Exercise,List<String>> agonistsMap=muscleService.getMusclesNames(agonistsService.findMuscleByExercise(exercisesList));
         Map<Exercise,List<String>> itemsMap=inventoryService.getInventoriesNames(itemsService.findInventoryByExercise(exercisesList));
-        return exerciseMapper.toDto(exercises,agonistsMap,itemsMap);
+        Map<Exercise,Boolean> favoritesMap=favouritesService.getFavouritesByExercise(exercisesList,employee);
+        return exerciseMapper.toDto(exercises,agonistsMap,itemsMap,favoritesMap);
     }
 }

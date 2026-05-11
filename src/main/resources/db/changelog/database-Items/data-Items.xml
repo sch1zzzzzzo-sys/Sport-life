@@ -6,7 +6,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="2026-03-02-data-Items.xml" author="Dmitry">
-        <loadData tableName="Items"
+        <loadData tableName="items"
                   file="db/changelog/database-Items/Items.csv"
                   quotchar='"'
                   separator=";"

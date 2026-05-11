@@ -9,7 +9,7 @@ import org.example.Inventory.Inventory;
 
 @Entity
 @Data
-@Table(name = "Items")
+@Table(name = "items")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Items {
@@ -18,9 +18,9 @@ public class Items {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="Inventory_id")
+    @JoinColumn(name="inventory_id")
     private Inventory inventory;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Exercise_id")
+    @JoinColumn(name = "exercise_id")
     private Exercise exercise;
 }

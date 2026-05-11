@@ -13,7 +13,7 @@ public class FindInventoriesResponse {
     private List<InventoryObject> inventories;
     private int size;
     private int page;
-    private long totalPage;
+    private int totalPage;
     @NoArgsConstructor
     @Data
     @AllArgsConstructor

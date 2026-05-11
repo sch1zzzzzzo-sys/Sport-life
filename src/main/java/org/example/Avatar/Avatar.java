@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Avatar")
+@Table(name = "avatar")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Avatar {
@@ -22,4 +22,8 @@ public class Avatar {
 
     @OneToMany(mappedBy = "avatar", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Employee> employee=new ArrayList<>();
+
+    public Avatar(String name) {
+        this.name=name;
+    }
 }

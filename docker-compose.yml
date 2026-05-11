@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: sport-life-postgres
+
+    restart: always
+
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: Dmitry
+      POSTGRES_PASSWORD: Sport-life-postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U Dmitry" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+
+
+    container_name: sport-life-app
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    ports:
+      - "49182:49182"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: Dmitry
+      SPRING_DATASOURCE_PASSWORD: Sport-life-postgres
+      SPRING_PROFILES_ACTIVE: docker
+
+volumes:
+  postgres_data:

@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthEmployeeRequest {
-    @NotBlank(message = "")
+    @NotBlank(message = "login не может быть пустым")
     private String login;
-    @NotBlank(message = "")
+    @NotBlank(message = "пароль не может быт пустым")
     private String password;
 }

@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.Employee.UseCase.*;
 import org.example.Employee.dto.request.*;
+import org.example.Employee.dto.response.SplashResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,10 @@ public class EmployeeController {
     @GetMapping("/top")
     public  ResponseEntity<?> findTopEmployees(){
         return ResponseEntity.ok(findTopEmployees.findTopEmployees());
-
+    }
+    @GetMapping("/splash")
+    public ResponseEntity<?> splash(){
+        return ResponseEntity.ok(new SplashResponse("message"));
     }
 
     @PatchMapping("/update")

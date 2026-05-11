@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Exercise")
+@Table(name = "exercise")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Exercise {

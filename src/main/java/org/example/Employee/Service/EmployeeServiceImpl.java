@@ -39,21 +39,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee authEmployee(String login, String password) {
         Employee employee=employeeRepository
                 .findByLogin(login)
-                .orElseThrow(()->new UnauthorizedEmployeeException("","login"));
+                .orElseThrow(()->new UnauthorizedEmployeeException("такого пользователя нет","login"));
         if(!passwordEncoder.matches(password,employee.getPassword())){
-            throw new UnauthorizedEmployeeException("","login");
+            throw new UnauthorizedEmployeeException("не верный пароль","login");
         }
         return employee;
     }
     @Override
     @Transactional
-    public Employee createEmployee(String login, String password) {
+    public Employee createEmployee(String login, String password,Avatar avatar) {
         String password1=passwordEncoder.encode(password);
         if(employeeRepository.findByLogin(login).isPresent()){
-            throw new EmployeeFoundException("","login");
+            throw new EmployeeFoundException("пользователь уже существует","login");
         }
-        Employee employee=new Employee(login,password1,0L);
-
+        Employee employee=new Employee(login,avatar,password1,0L);
         employeeRepository.save(employee);
         return employee;
     }
