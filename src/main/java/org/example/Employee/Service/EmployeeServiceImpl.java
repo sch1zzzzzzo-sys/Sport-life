@@ -23,14 +23,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public String getEmployeeExpert(Employee employee) {
         if(employee.getExperts()==null){
-            throw new ExpertsNotFoundException("");
+            throw new ExpertsNotFoundException("пользователь не выбрал свой уровень","result");
         }
         return employee.getExperts();
     }
     @Override
     @Transactional(readOnly = true)
     public Employee findEmployeeByLogin(String login) {
-        return employeeRepository.findWithAvatarByLogin(login).orElseThrow(()->new UnauthorizedEmployeeException("","login"));
+        return employeeRepository.findWithAvatarByLogin(login).orElseThrow(()->new UnauthorizedEmployeeException("пользователь не найден","login"));
     }
 
 
@@ -41,7 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .findByLogin(login)
                 .orElseThrow(()->new UnauthorizedEmployeeException("такого пользователя нет","login"));
         if(!passwordEncoder.matches(password,employee.getPassword())){
-            throw new UnauthorizedEmployeeException("не верный пароль","login");
+            throw new UnauthorizedEmployeeException("не верный пароль","password");
         }
         return employee;
     }
@@ -59,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public void updateEmployeeExpert(String login, String experts) {
-        Employee employee=employeeRepository.findByLogin(login).orElseThrow(()->new UnauthorizedEmployeeException("","login"));
+        Employee employee=employeeRepository.findByLogin(login).orElseThrow(()->new UnauthorizedEmployeeException("пользователь не авторизован","experts"));
         employee.setExperts(experts);
     }
     @Override

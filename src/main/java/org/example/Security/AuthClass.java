@@ -25,10 +25,10 @@ public class AuthClass{
         return Jwts
                 .builder()
                 .setSubject(login)
-                .setIssuedAt(new Date())
                 .signWith(Keys.hmacShaKeyFor(SECRET_ACCESS.getBytes()))
-                .setExpiration(new Date(System.currentTimeMillis() +900000))
                 .claim("ROLE","USER")
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() +900000))
                 .compact();
     }
     public String getLoginAccess(String token){
@@ -42,7 +42,7 @@ public class AuthClass{
     public String getLoginRefresh(String token){
         return Jwts.parserBuilder()
                 .setSigningKey(Keys.hmacShaKeyFor(SECRET_REFRESH.getBytes()))
-                .build().parseClaimsJwt(token)
+                .build().parseClaimsJws(token)
                 .getBody()
                 .getSubject();
     }
@@ -51,10 +51,10 @@ public class AuthClass{
             Jwts.parserBuilder()
                     .setSigningKey(Keys.hmacShaKeyFor(SECRET_REFRESH.getBytes()))
                     .build()
-                    .parseClaimsJwt(tokenRefresh);
+                    .parseClaimsJws(tokenRefresh);
+            return true;
         }catch (Exception e){
             return false;
         }
-        return false;
     }
 }

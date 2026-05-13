@@ -29,7 +29,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/swagger-ui/index.html/**","/Employee/create","Employee/auth","/Avatar/info","/Employee/splash","/Employee/refresh","/Employee/top").permitAll()
+                        .requestMatchers("/swagger-ui/index.html/**","/Employee/create","Employee/auth","/Employee/splash","/Employee/refresh","/Employee/top","/Employee/experts").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex

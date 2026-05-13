@@ -26,7 +26,7 @@ public class InventoryServiceImpl implements InventoryService {
     public List<Inventory> findInventoriesByNames(List<String> names) {
         List<Inventory> inventories=inventoryRepository.findByNameIn(names);
         if(inventories.isEmpty()){
-            throw new InventoryNotFoundException("","");
+            throw new InventoryNotFoundException("такой инвентарь не найден","result");
         }
         return inventories;
     }

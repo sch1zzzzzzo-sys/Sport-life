@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateEmployeeExpertsRequest {
-    @NotBlank(message = "")
+    @NotBlank(message = "экспертность не может быть пустой")
     private String experts;
 }

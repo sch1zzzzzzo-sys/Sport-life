@@ -27,7 +27,7 @@ public class ExerciseServiceImpl implements ExerciseService {
         Pageable pageable= PageRequest.of(page,size);
         Page<Exercise> exercises=exerciseRepository.findByFiltered(agonists,items,experts,pageable);
         if(exercises.isEmpty()){
-            throw new ExerciseNotFoundException("","result");
+            throw new ExerciseNotFoundException("ничего не найдено,странно","result");
         }
         return exercises;
     }

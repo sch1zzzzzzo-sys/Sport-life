@@ -16,6 +16,5 @@ public class FindMusclesResponse {
     @AllArgsConstructor
     public static class MuscleObject {
         private String name;
-        private String photo;
     }
 }

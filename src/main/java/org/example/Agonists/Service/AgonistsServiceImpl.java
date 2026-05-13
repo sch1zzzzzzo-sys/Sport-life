@@ -22,7 +22,7 @@ public class AgonistsServiceImpl implements AgonistsService {
     public Set<Exercise> getExercises(List<Muscle> muscles) {
         Set<Exercise> exercises =agonistsRepository.findByMuscleIn(muscles);
         if(exercises.isEmpty()){
-            throw new ExerciseNotFoundException("","muscle");
+            throw new ExerciseNotFoundException("упражнений для таких мышц не найдена","result");
         }
         return exercises;
     }

@@ -17,22 +17,29 @@ import java.util.stream.Collectors;
 public class ExceptionController {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<?> BusinessError(BusinessException e){
-        Map<String,String> response=new LinkedHashMap<>();
-        response.put(e.getStatus().toString(),e.getMessage());
-        return ResponseEntity.status(e.getStatus()).body(response);
+        Map<String,Object> response=new LinkedHashMap<>();
+        response.put(e.getName(),e.getMessage());
+        return ResponseEntity.status(e.getStatus()).body(new ErrorResponse(e.getStatus().toString(),response));
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> ValidError(MethodArgumentNotValidException e){
         Map<String,Object> response=new LinkedHashMap<>();
-        response.put("errors",e.getBindingResult().getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField,FieldError::getDefaultMessage)));
+         response =
+                e.getBindingResult()
+                        .getFieldErrors()
+                        .stream()
+                        .collect(Collectors.toMap(
+                                FieldError::getField,
+                                FieldError::getDefaultMessage
+                        ));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( new ErrorResponse("400",response));
     }
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<?> ExceptionError(Exception e){
-        Map<String,String> response=new LinkedHashMap<>();
+        Map<String,Object> response=new LinkedHashMap<>();
         response.put("500",e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("500",response));
     }
 }

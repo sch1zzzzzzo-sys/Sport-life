@@ -20,6 +20,8 @@ public class RefreshEmployeeToken {
             String login=authClass.getLoginRefresh(tokenRefresh);
             tokenAccess=authClass.createToken(login);
             response=new RefreshEmployeeTokenResponse(tokenAccess,tokenRefresh);
+        }else {
+            response=null;
         }
         return response;
     }
