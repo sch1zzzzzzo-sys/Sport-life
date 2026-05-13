@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Inventory")
+@Table(name = "inventory")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Inventory {

@@ -13,7 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,23 +26,39 @@ public class FavouritesServiceImpl implements FavouritesService {
     @Transactional
     public void createFavourites(Employee employee, Exercise exercise) {
         boolean presenceFavourites =favouritesRepository.existsByEmployeeAndExercise(employee,exercise);
-        if(presenceFavourites) throw new FavouritesFoundExceptions("");
+        if(presenceFavourites) throw new FavouritesFoundExceptions("","favourite");
         Favourites favourite=new Favourites(exercise,employee);
         favouritesRepository.save(favourite);
     }
     @Override
     @Transactional
     public void deleteFavourites(Employee employee,Exercise exercise) {
-        Favourites favourite = favouritesRepository.findByEmployeeAndExercise(employee,exercise).orElseThrow(()->new FavouritesNotFoundException(""));
+        Favourites favourite = favouritesRepository.findByEmployeeAndExercise(employee,exercise).orElseThrow(()->new FavouritesNotFoundException("","favourite"));
         favouritesRepository.delete(favourite);
     }
     @Override
     @Transactional(readOnly = true)
-    public List<Exercise> findExerciseByEmployees(Employee employee) {
-        List<Favourites> favourites = favouritesRepository.findByEmployee(employee);
+    public Page<Exercise> findExerciseByEmployees(Employee employee,int page,int size) {
+        Pageable pageable=PageRequest.of(page,size);
+        Page<Favourites> favourites = favouritesRepository.findByEmployee(employee,pageable);
         if (favourites.isEmpty()) {
-            throw new FavouritesNotFoundException("");
+            throw new FavouritesNotFoundException("","result");
         }
-        return favourites.stream().map(Favourites::getExercise).toList();
+        return favourites.map(Favourites::getExercise);
+    }
+
+    @Override
+    public Map<Exercise, Boolean> getFavouritesByExercise(List<Exercise> exercises, Employee employee) {
+        List<Exercise> favourites= favouritesRepository.findFavouritesByEmployeeAndExerciseIn(exercises,employee).stream().map(f-> f.getExercise()).toList();
+        Map<Exercise,Boolean> favouritesMaps=new LinkedHashMap<>();
+        for(Exercise exercise:exercises){
+            if(favourites.contains(exercise)){
+                favouritesMaps.put(exercise,true);
+            }else{
+                favouritesMaps.put(exercise,false);
+            }
+        }
+        return favouritesMaps;
+
     }
 }

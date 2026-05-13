@@ -6,9 +6,9 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="2026-03-02-Employee.xml" author="Dmitry">
-        <createTable tableName="Employee">
+        <createTable tableName="employee">
             <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false" unique="true" primaryKey="true"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="login" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true"/>
@@ -19,8 +19,8 @@
             <column name="experts" type="VARCHAR(20)">
                 <constraints nullable="true" unique="false"/>
             </column>
-            <column name="Avatar_id" type="BIGINT" defaultValue="">
-                <constraints nullable="false" unique="false" references="Avatar(id)" foreignKeyName="fk_Avatar_Employee"/>
+            <column name="avatar_id" type="BIGINT" >
+                <constraints nullable="false" unique="false" references="avatar(id)" foreignKeyName="fk_avatar_employee"/>
             </column>
             <column name="activity" type="BIGINT">
                 <constraints nullable="false" unique="false"/>

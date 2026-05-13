@@ -4,6 +4,7 @@ import org.example.Employee.Employee;
 import org.example.Exercise.Exercise;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,8 +15,11 @@ import java.util.Optional;
 
 @Repository
 public interface FavouritesRepository extends JpaRepository<Favourites,Long> {
-    @Query("select f from Favourites f join fetch f.exercise where f.employee =:employee")
-    List<Favourites> findByEmployee(@Param("employee") Employee employee);
+    @EntityGraph(attributePaths = {"exercise"})
+    Page<Favourites> findByEmployee( Employee employee,Pageable pageable);
     Optional<Favourites> findByEmployeeAndExercise(Employee employee, Exercise exercise);
-    boolean existsByEmployeeAndExercise(Employee employee,Exercise exercise);
+
+    boolean existsByEmployeeAndExercise(Employee employee, Exercise exercise);
+    @Query("select f from Favourites f where f.employee=: employee and f.exercise in: exercises ")
+    List<Favourites> findFavouritesByEmployeeAndExerciseIn(@Param("exercises") List<Exercise> exercises,@Param("employee") Employee employee);
 }

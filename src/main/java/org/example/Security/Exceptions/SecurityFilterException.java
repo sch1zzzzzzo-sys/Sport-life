@@ -20,8 +20,10 @@ public class SecurityFilterException implements AccessDeniedHandler {
         response.setContentType("application/json");
         response.getWriter().write("""
             {
-              "error": "403 Forbidden",
-              "message": "Нет доступа"
+              "status": "403 Forbidden",
+              "errors": {
+                  "user": "нет доступа"
+              }
             }
         """);
 

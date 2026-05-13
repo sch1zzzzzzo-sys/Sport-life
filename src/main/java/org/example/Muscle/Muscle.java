@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Muscle")
+@Table(name = "muscle")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +19,6 @@ public class Muscle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String photo;
 
     @OneToMany(mappedBy = "muscle", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Agonists> agonists=new ArrayList<>();

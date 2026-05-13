@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.Employee.UseCase.*;
 import org.example.Employee.dto.request.*;
-import org.example.Employee.dto.response.EmployeeDetailsResponse;
+import org.example.Employee.dto.response.SplashResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +20,7 @@ public class EmployeeController {
     private final UpdateEmployee updateEmployee;
     private final UpdateEmployeeActivity updateEmployeeActivity;
     private final UpdateEmployeeExperts updateEmployeeExperts;
+    private final RefreshEmployeeToken refreshEmployeeToken;
 
     @PostMapping("/auth")
     public ResponseEntity<?> authEmployee(@Valid @RequestBody  AuthEmployeeRequest dto){
@@ -29,6 +30,10 @@ public class EmployeeController {
     public ResponseEntity<?> createEmployee(@Valid  @RequestBody CreateEmployeeRequest dto){
         return ResponseEntity.ok(createEmployee.createEmployee(dto));
     }
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refreshToken(@Valid @RequestBody RefreshEmployeeTokenRequest dto){
+        return ResponseEntity.ok(refreshEmployeeToken.refresh(dto));
+    }
 
     @GetMapping("/info")
     public ResponseEntity<?> findEmployee(@AuthenticationPrincipal EmployeePrincipal principal){
@@ -37,7 +42,10 @@ public class EmployeeController {
     @GetMapping("/top")
     public  ResponseEntity<?> findTopEmployees(){
         return ResponseEntity.ok(findTopEmployees.findTopEmployees());
-
+    }
+    @GetMapping("/splash")
+    public ResponseEntity<?> splash(){
+        return ResponseEntity.ok(new SplashResponse("message"));
     }
 
     @PatchMapping("/update")

@@ -1,6 +1,5 @@
 package org.example.Employee.UseCase;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.Avatar.Avatar;
 import org.example.Avatar.Service.AvatarService;
@@ -11,6 +10,8 @@ import org.example.Employee.dto.request.UpdateEmployeeRequest;
 import org.example.Employee.dto.response.UpdateEmployeeResponse;
 import org.example.Security.AuthClass;
 import org.springframework.stereotype.Service;
+
+import java.sql.Ref;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +35,8 @@ public class UpdateEmployee {
         }
         Employee employee=employeeService.findEmployeeByLogin(principal.getLogin());
         employeeService.updateEmployee(dto.getLogin(),employee,avatar);
-        String token = authClass.createToken(employee.getLogin());
-        return new UpdateEmployeeResponse("Update "+message+" complete",token);
+        String AccessToken = authClass.createToken(employee.getLogin());
+        String RefreshToken=authClass.createRefresh(employee.getLogin());
+        return new UpdateEmployeeResponse("Update "+message+" complete", AccessToken, RefreshToken);
     }
 }

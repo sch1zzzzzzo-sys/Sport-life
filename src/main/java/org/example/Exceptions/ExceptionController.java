@@ -1,5 +1,6 @@
 package org.example.Exceptions;
 
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -16,20 +17,29 @@ import java.util.stream.Collectors;
 public class ExceptionController {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<?> BusinessError(BusinessException e){
-        ErrorResponse errorResponse=new ErrorResponse(e.getStatus(),e.getMessage());
-        return ResponseEntity.status(e.getStatus()).body(errorResponse);
+        Map<String,Object> response=new LinkedHashMap<>();
+        response.put(e.getName(),e.getMessage());
+        return ResponseEntity.status(e.getStatus()).body(new ErrorResponse(e.getStatus().toString(),response));
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String,Object> ValidError(MethodArgumentNotValidException e){
+    public ResponseEntity<ErrorResponse> ValidError(MethodArgumentNotValidException e){
         Map<String,Object> response=new LinkedHashMap<>();
-        response.put("errors",e.getBindingResult().getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField,FieldError::getDefaultMessage)));
-        return response;
+         response =
+                e.getBindingResult()
+                        .getFieldErrors()
+                        .stream()
+                        .collect(Collectors.toMap(
+                                FieldError::getField,
+                                FieldError::getDefaultMessage
+                        ));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( new ErrorResponse("400",response));
     }
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse ExceptionError(Exception e){
-        ErrorResponse errorResponse=new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage());
-        return errorResponse;
+    public ResponseEntity<?> ExceptionError(Exception e){
+        Map<String,Object> response=new LinkedHashMap<>();
+        response.put("500",e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("500",response));
     }
 }

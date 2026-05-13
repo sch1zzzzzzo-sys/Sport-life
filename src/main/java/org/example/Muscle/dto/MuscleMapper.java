@@ -14,7 +14,6 @@ public class MuscleMapper {
                 muscles.stream().map(m->{
             FindMusclesResponse.MuscleObject muscleObject=new FindMusclesResponse.MuscleObject();
             muscleObject.setName(m.getName());
-            muscleObject.setPhoto(m.getPhoto());
             return muscleObject;
         }).toList()
         );

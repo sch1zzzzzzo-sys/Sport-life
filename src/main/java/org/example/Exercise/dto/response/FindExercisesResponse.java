@@ -11,16 +11,19 @@ import java.util.List;
 @AllArgsConstructor
 public class FindExercisesResponse {
     private List<ExerciseObject> exercises;
-
+    private int size;
+    private int page;
+    private int totalPage;
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ExerciseObject{
-        private String name;
         private String video;
         private String description;
-        private String photo;
+        private String name;
         private List<String> muscles;
         private List<String> items;
+        private Boolean favourites;
+        private String experts;
     }
 }

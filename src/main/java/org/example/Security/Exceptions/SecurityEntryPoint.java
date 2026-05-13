@@ -20,8 +20,10 @@ public class SecurityEntryPoint implements AuthenticationEntryPoint {
         response.setContentType("application/json");
         response.getWriter().write("""
             {
-              "error": "401 Unauthorized",
-              "message": "Invalid or missing JWT"
+              "status":"401 Unauthorized",
+              "errors":{
+                 "user":"Invalid authorized token"
+              }
             }
         """);
     }

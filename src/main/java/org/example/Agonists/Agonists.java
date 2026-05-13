@@ -9,7 +9,7 @@ import org.example.Muscle.Muscle;
 
 @Entity
 @Data
-@Table(name = "Agonists")
+@Table(name = "agonists")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Agonists {
@@ -18,9 +18,9 @@ public class Agonists {
     private Long id;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "Muscle_id")
+    @JoinColumn(name = "muscle_id")
     private Muscle muscle;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Exercise_id")
+    @JoinColumn(name = "exercise_id")
     private Exercise exercise;
 }
