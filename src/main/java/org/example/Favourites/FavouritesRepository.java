@@ -20,6 +20,6 @@ public interface FavouritesRepository extends JpaRepository<Favourites,Long> {
     Optional<Favourites> findByEmployeeAndExercise(Employee employee, Exercise exercise);
 
     boolean existsByEmployeeAndExercise(Employee employee, Exercise exercise);
-    @Query("select f from Favourites f where f.employee=: employee and f.exercise in: exercises ")
+    @Query("select f from Favourites f where f.employee=:employee and f.exercise in:exercises ")
     List<Favourites> findFavouritesByEmployeeAndExerciseIn(@Param("exercises") List<Exercise> exercises,@Param("employee") Employee employee);
 }
