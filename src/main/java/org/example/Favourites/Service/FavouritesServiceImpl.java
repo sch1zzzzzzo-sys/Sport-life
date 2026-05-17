@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,7 +48,7 @@ public class FavouritesServiceImpl implements FavouritesService {
 
     @Override
     public Map<Exercise, Boolean> getFavouritesByExercise(List<Exercise> exercises, Employee employee) {
-        List<Exercise> favourites= favouritesRepository.findFavouritesByEmployeeAndExerciseIn(exercises,employee).stream().map(f-> f.getExercise()).toList();
+        List<Exercise> favourites= favouritesRepository.findFavouritesByEmployeeAndExerciseIn(exercises,employee).stream().map(Favourites::getExercise).toList();
         Map<Exercise,Boolean> favouritesMaps=new LinkedHashMap<>();
         for(Exercise exercise:exercises){
             if(favourites.contains(exercise)){
