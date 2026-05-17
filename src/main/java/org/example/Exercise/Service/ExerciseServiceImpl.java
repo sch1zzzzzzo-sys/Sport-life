@@ -1,5 +1,6 @@
 package org.example.Exercise.Service;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.example.Exercise.Exceptions.ExerciseNotFoundException;
 import org.example.Exercise.Exercise;
