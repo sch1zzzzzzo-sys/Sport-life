@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FindFavouritesResponse {
-    private List<FavouriteObject> favourites;
+    private List<FavouriteObject> exercises;
     private int page;
     private int size;
     private long totalPage;
@@ -22,7 +22,9 @@ public class FindFavouritesResponse {
         private String video;
         private String description;
         private String photo;
-        private List<String> males;
+        private List<String> muscles;
         private List<String> items;
+        private String experts;
+        private Boolean favourites;
     }
 }

@@ -21,9 +21,11 @@ public class FavouriteMapper {
                 e.getDescription(),
                 e.getPhoto(),
                 agonistsMap.get(e),
-                itemsMap.get(e)
+                itemsMap.get(e),
+                e.getExperts(),
+                true
         )).toList();
-        findFavouritesResponse.setFavourites(favouritesObjects);
+        findFavouritesResponse.setExercises(favouritesObjects);
         return findFavouritesResponse;
     }
 }
