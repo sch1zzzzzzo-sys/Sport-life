@@ -20,7 +20,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Override
     @Transactional(readOnly = true)
     public Exercise findExercisesByName(String name) {
-        return exerciseRepository.findByName(name).orElseThrow(()->new ExerciseNotFoundException("",""));
+        return exerciseRepository.findByName(name).orElseThrow(()->new ExerciseNotFoundException("Упражнение не найдено","favourites"));
     }
     @Override
     public Page<Exercise> filterExerciseByExperts(String experts, Set<Exercise> agonists, Set<Exercise> items, int page, int size) {

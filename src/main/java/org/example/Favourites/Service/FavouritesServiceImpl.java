@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +32,7 @@ public class FavouritesServiceImpl implements FavouritesService {
     @Override
     @Transactional
     public void deleteFavourites(Employee employee,Exercise exercise) {
-        Favourites favourite = favouritesRepository.findByEmployeeAndExercise(employee,exercise).orElseThrow(()->new FavouritesNotFoundException("","favourite"));
+        Favourites favourite = favouritesRepository.findByEmployeeAndExercise(employee,exercise).orElseThrow(()->new FavouritesNotFoundException("Упражнение уже удаленно из списка избранного","favourite"));
         favouritesRepository.delete(favourite);
     }
     @Override
@@ -42,14 +41,14 @@ public class FavouritesServiceImpl implements FavouritesService {
         Pageable pageable=PageRequest.of(page,size);
         Page<Favourites> favourites = favouritesRepository.findByEmployee(employee,pageable);
         if (favourites.isEmpty()) {
-            throw new FavouritesNotFoundException("","result");
+            throw new FavouritesNotFoundException("ничего не найдено","favourites");
         }
         return favourites.map(Favourites::getExercise);
     }
 
     @Override
     public Map<Exercise, Boolean> getFavouritesByExercise(List<Exercise> exercises, Employee employee) {
-        List<Exercise> favourites= favouritesRepository.findFavouritesByEmployeeAndExerciseIn(exercises,employee).stream().map(f-> f.getExercise()).toList();
+        List<Exercise> favourites= favouritesRepository.findFavouritesByEmployeeAndExerciseIn(exercises,employee).stream().map(Favourites::getExercise).toList();
         Map<Exercise,Boolean> favouritesMaps=new LinkedHashMap<>();
         for(Exercise exercise:exercises){
             if(favourites.contains(exercise)){
