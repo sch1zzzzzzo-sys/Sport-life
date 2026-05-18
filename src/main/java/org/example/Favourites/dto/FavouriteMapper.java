@@ -1,5 +1,6 @@
 package org.example.Favourites.dto;
 
+import lombok.NoArgsConstructor;
 import org.example.Exercise.Exercise;
 import org.example.Favourites.dto.response.FindFavouritesResponse;
 import org.springframework.data.domain.Page;
@@ -9,7 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@NoArgsConstructor
 public class FavouriteMapper {
+
     public FindFavouritesResponse toDto(Page<Exercise> exercises, Map<Exercise,List<String>> agonistsMap, Map<Exercise,List<String>> itemsMap){
         FindFavouritesResponse findFavouritesResponse=new FindFavouritesResponse();
         findFavouritesResponse.setSize(exercises.getSize());
@@ -21,9 +24,11 @@ public class FavouriteMapper {
                 e.getDescription(),
                 e.getPhoto(),
                 agonistsMap.get(e),
-                itemsMap.get(e)
+                itemsMap.get(e),
+                e.getExperts(),
+                true
         )).toList();
-        findFavouritesResponse.setFavourites(favouritesObjects);
+        findFavouritesResponse.setExercises(favouritesObjects);
         return findFavouritesResponse;
     }
 }

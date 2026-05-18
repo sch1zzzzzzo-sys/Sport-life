@@ -28,7 +28,7 @@ public class AuthClass{
                 .signWith(Keys.hmacShaKeyFor(SECRET_ACCESS.getBytes()))
                 .claim("ROLE","USER")
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() +900000))
+                .setExpiration(new Date(System.currentTimeMillis() + 900000))
                 .compact();
     }
     public String getLoginAccess(String token){
