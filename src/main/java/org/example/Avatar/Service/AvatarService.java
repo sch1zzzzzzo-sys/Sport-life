@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Service
 public interface AvatarService {
-     Page<Avatar> findAllAvatars(int page,int size);
+     List<Avatar> findAllAvatars();
      Avatar findAvatarByName(String name);
 
      Map<Employee,String> getAvatarsNames(Map<Employee,Avatar> avatars);

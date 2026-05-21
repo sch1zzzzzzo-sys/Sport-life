@@ -22,12 +22,11 @@ public class EmployeeMapper {
         findTopEmployeesResponse.setTop(top);
         return findTopEmployeesResponse;
     }
-    public FindEmployeeResponse toDtoEmployee(Map<Employee,String> avatar){
+    public FindEmployeeResponse toDtoEmployee(Map<Employee,String> avatar,Long top){
         return  avatar.entrySet().stream().findFirst().map(a->{
              return new FindEmployeeResponse(
-                     a.getKey().getLogin(),a.getValue(),a.getKey().getExperts(),a.getKey().getActivity()
+                     a.getKey().getLogin(),a.getValue(),a.getKey().getExperts(),a.getKey().getActivity(),top
              );
-
          }).orElse(null);
     }
     public Map<Employee, Avatar> toMapEmployee(List<Employee> employees){
