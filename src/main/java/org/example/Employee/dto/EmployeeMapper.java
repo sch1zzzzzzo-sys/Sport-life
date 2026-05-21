@@ -7,10 +7,8 @@ import org.example.Employee.dto.response.FindEmployeeResponse;
 import org.example.Employee.dto.response.FindTopEmployeesResponse;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Component

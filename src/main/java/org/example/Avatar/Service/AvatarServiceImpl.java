@@ -5,9 +5,6 @@ import org.example.Avatar.Avatar;
 import org.example.Avatar.AvatarRepository;
 import org.example.Avatar.Exceptions.AvatarNotFoundException;
 import org.example.Employee.Employee;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

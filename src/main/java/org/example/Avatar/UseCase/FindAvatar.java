@@ -5,7 +5,6 @@ import org.example.Avatar.Avatar;
 import org.example.Avatar.Service.AvatarService;
 import org.example.Avatar.dto.AvatarMapper;
 import org.example.Avatar.dto.response.FindAvatarResponse;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

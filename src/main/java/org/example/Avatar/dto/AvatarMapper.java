@@ -3,7 +3,6 @@ package org.example.Avatar.dto;
 import lombok.NoArgsConstructor;
 import org.example.Avatar.Avatar;
 import org.example.Avatar.dto.response.FindAvatarResponse;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

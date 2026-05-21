@@ -2,12 +2,8 @@ package org.example.Security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import jakarta.validation.constraints.NotNull;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnNotWebApplication;
 import org.springframework.stereotype.Service;
-
-import java.security.Key;
 import java.util.Date;
 
 @Service
