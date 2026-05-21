@@ -83,7 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void updateEmployeeActivity(String login) {
         Employee employee=employeeRepository.findByLogin(login).orElseThrow(()->new UnauthorizedEmployeeException("","login"));
-        employee.setActivity(employee.getActivity()+1);;
+        employee.setActivity(employee.getActivity()+1);
     }
     @Override
     @Transactional(readOnly = true)
