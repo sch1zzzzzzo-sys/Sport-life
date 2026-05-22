@@ -2,12 +2,12 @@ package org.example.Security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.security.Key;
 import java.util.Date;
 
 @Service
+@NoArgsConstructor
 public class AuthClass{
     private final String SECRET_ACCESS ="rtdffhbdfhjdbfhsbfbsdfbsdbfhsjdbfjhsdb";
     private final String SECRET_REFRESH="aresadaxsdfaxsfdaxsfAXSFXAsdxasxafsa";
