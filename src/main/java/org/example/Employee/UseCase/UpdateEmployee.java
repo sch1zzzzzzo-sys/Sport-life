@@ -11,8 +11,6 @@ import org.example.Employee.dto.response.UpdateEmployeeResponse;
 import org.example.Security.AuthClass;
 import org.springframework.stereotype.Service;
 
-import java.sql.Ref;
-
 @Service
 @RequiredArgsConstructor
 public class UpdateEmployee {
@@ -23,14 +21,14 @@ public class UpdateEmployee {
     public UpdateEmployeeResponse updateEmployee(UpdateEmployeeRequest dto, EmployeePrincipal principal){
         Avatar avatar=null;
         String message="";
-        if(!dto.getAvatar().isBlank()) {
+        if(dto.getAvatar()!=null) {
             avatar = avatarService.findAvatarByName(dto.getAvatar());
             message="avatar";
         }
-        if(!dto.getLogin().isBlank()){
+        if(dto.getLogin()!=null){
             message="login";
         }
-        if(!dto.getAvatar().isBlank()&&!dto.getLogin().isBlank()){
+        if(dto.getAvatar()!=null&&dto.getLogin()==null){
             message="login and avatar";
         }
         Employee employee=employeeService.findEmployeeByLogin(principal.getLogin());
