@@ -5,12 +5,10 @@ import org.example.Avatar.Avatar;
 import org.example.Avatar.AvatarRepository;
 import org.example.Avatar.Exceptions.AvatarNotFoundException;
 import org.example.Employee.Employee;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -28,9 +26,8 @@ public class AvatarServiceImpl implements AvatarService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Avatar> findAllAvatars(int page, int size) {
-        Pageable pageable= PageRequest.of(page,size);
-        return avatarRepository.findAll(pageable);
+    public List<Avatar> findAllAvatars() {
+        return avatarRepository.findAll();
     }
 
     @Override

@@ -12,4 +12,5 @@ public class FindEmployeeResponse {
     private String avatar;
     private String experts;
     private Long activity;
+    private Long top;
 }

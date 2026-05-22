@@ -68,10 +68,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(login!=null){
             Employee employee1=employeeRepository.findByLogin(login).orElse(null);
             if(Objects.equals(employee1,employee)){
-                throw new EmployeeFoundException("","login");
+                throw new EmployeeFoundException("это имя уже принадлежит вам","login");
             }
             if(employee1!=null) {
-                throw new EmployeeFoundException("","login");
+                throw new EmployeeFoundException("пользователь с таким именем уже существует","login");
             }
             employee.setLogin(login);
         }
@@ -83,7 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void updateEmployeeActivity(String login) {
         Employee employee=employeeRepository.findByLogin(login).orElseThrow(()->new UnauthorizedEmployeeException("","login"));
-        employee.setActivity(employee.getActivity()+1);;
+        employee.setActivity(employee.getActivity()+1);
     }
     @Override
     @Transactional(readOnly = true)
