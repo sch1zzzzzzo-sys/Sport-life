@@ -1,5 +1,6 @@
 package org.example.Exceptions;
 
+import lombok.extern.java.Log;
 import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +32,10 @@ public class ExceptionController {
                         .stream()
                         .collect(Collectors.toMap(
                                 FieldError::getField,
-                                FieldError::getDefaultMessage
+                                FieldError::getDefaultMessage,
+                                (a, b) -> a
                         ));
+        System.out.println(response.toString());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( new ErrorResponse("400",response));
     }
     @ExceptionHandler(Exception.class)
